@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="367dd060-090a-438c-87c0-67b4e39da6cf" Codepage="1252" Language="1033" Manufacturer="test" Name="test02" UpgradeCode="b98e9f37-70a1-4167-91d3-6ee02f1001dd" Version="1.0.0.1">
+    <Product Id="367dd060-090a-438c-87c0-67b4e39da6cf" Codepage="1252" Language="1033" Manufacturer="test" Name="test03" UpgradeCode="b98e9f37-70a1-4167-91d3-6ee02f1001dd" Version="1.0.0.1">
         <Package Compressed="yes" InstallerVersion="200" Languages="1033" Platform="x64" SummaryCodepage="1252"/>
         <Media Id="1" Cabinet="Application.cab" EmbedCab="yes"/>
         <Directory Id="TARGETDIR" Name="SourceDir">
