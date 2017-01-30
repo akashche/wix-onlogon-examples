@@ -1,0 +1,3 @@
+[submodule "wix"]
+	path = wix
+	url = https://github.com/ojdkbuild/tools_wix.git
