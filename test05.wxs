@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Id="367dd060-090a-438c-87c0-67b4e39da6cf" Codepage="1252" Language="1033" Manufacturer="test" Name="test05" UpgradeCode="b98e9f37-70a1-4167-91d3-6ee02f1001dd" Version="1.0.0.1">
+        <Package Compressed="yes" InstallerVersion="200" Languages="1033" Platform="x64" SummaryCodepage="1252"/>
+        <Media Id="1" Cabinet="Application.cab" EmbedCab="yes"/>
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFiles64Folder">
+                <Directory Id="INSTALLDIR" Name="test">
+                    <Component Id="testcomp" Guid="4ecf46be-3a9d-4ec6-9749-f107cf190bd7" Win64="yes">
+                        <File Id="testfile" Name="test.txt" KeyPath="yes" DiskId="1" Source="..\test.txt"/>
+                    </Component>
+                </Directory>
+            </Directory>
+        </Directory>
+        <Feature Id="test" Absent="disallow" AllowAdvertise="no" ConfigurableDirectory="INSTALLDIR" Description="test" Title="test">
+            <ComponentRef Id="testcomp"/>
+        </Feature>
+
+        <!-- immediate actions -->
+        <CustomAction Id="action_1_prep" Property="action_1" Value="&quot;[SystemFolder]cmd.exe&quot; /c echo hello"/>
+        <CustomAction Id="action_2_prep" Property="action_2" Value="&quot;[SystemFolder]schtasks.exe&quot; /create /tn test /sc daily /st 12:10 /ru [LogonUser] /tr &quot;\&quot;[SystemFolder]cmd.exe\&quot; /c hello&quot;"/>
+        <CustomAction Id="action_3_prep" Property="action_3" Value="&quot;[SystemFolder]schtasks.exe&quot; /query /tn test"/>
+        <CustomAction Id="action_4_prep" Property="action_4" Value="&quot;[SystemFolder]schtasks.exe&quot; /delete /f /tn test"/>
+
+        <!-- deferred actions -->
+        <CustomAction Id="action_1" BinaryKey="WixCA" DllEntry="WixQuietExec64" Return="ignore" Execute="deferred" Impersonate="no"/>
+        <CustomAction Id="action_2" BinaryKey="WixCA" DllEntry="WixQuietExec64" Return="ignore" Execute="deferred" Impersonate="no"/>
+        <CustomAction Id="action_3" BinaryKey="WixCA" DllEntry="WixQuietExec64" Return="ignore" Execute="deferred" Impersonate="no"/>
+        <CustomAction Id="action_4" BinaryKey="WixCA" DllEntry="WixQuietExec64" Return="ignore" Execute="deferred" Impersonate="no"/>
+
+        <!-- actions order -->
+        <InstallExecuteSequence>
+            <Custom Action="action_1_prep" Before="InstallInitialize">&amp;test=3 AND NOT !test=3</Custom>
+            <Custom Action="action_2_prep" Before="InstallInitialize">&amp;test=3 AND NOT !test=3</Custom>
+            <Custom Action="action_3_prep" Before="InstallInitialize">&amp;test=3 AND NOT !test=3</Custom>
+            <Custom Action="action_4_prep" Before="InstallInitialize">&amp;test=3 AND NOT !test=3</Custom>
+            <Custom Action="action_1" Before="action_2">&amp;test=3 AND NOT !test=3</Custom>
+            <Custom Action="action_2" Before="action_3">&amp;test=3 AND NOT !test=3</Custom>
+            <Custom Action="action_3" Before="action_4">&amp;test=3 AND NOT !test=3</Custom>
+            <Custom Action="action_4" Before="InstallFinalize">&amp;test=3 AND NOT !test=3</Custom>
+        </InstallExecuteSequence>
+
+        <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR"/>
+        <UIRef Id="WixUI_FeatureTree"/>
+        <UIRef Id="WixUI_ErrorProgressText"/>
+        <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="yes" DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." IgnoreRemoveFailure="no"/>
+    </Product>
+</Wix>

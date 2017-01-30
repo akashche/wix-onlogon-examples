@@ -28,9 +28,15 @@ rem ..\wix\bin\light.exe -ext WixUIExtension -ext WixUtilExtension -sw1076 test0
 rem popd || exit /b 1
 
 rem test04
+rem pushd "%SCRIPT_DIR%work" || exit /b 1
+rem ..\wix\bin\candle.exe ..\test04.wxs || exit /b 1
+rem ..\wix\bin\light.exe -ext WixUIExtension -ext WixUtilExtension -sw1076 test04.wixobj || exit /b 1
+rem popd || exit /b 1
+
+rem test05
 pushd "%SCRIPT_DIR%work" || exit /b 1
-..\wix\bin\candle.exe ..\test04.wxs || exit /b 1
-..\wix\bin\light.exe -ext WixUIExtension -ext WixUtilExtension -sw1076 test04.wixobj || exit /b 1
+..\wix\bin\candle.exe ..\test05.wxs || exit /b 1
+..\wix\bin\light.exe -ext WixUIExtension -ext WixUtilExtension -sw1076 test05.wixobj || exit /b 1
 popd || exit /b 1
 
 echo EXIT_BUILD_SUCCESS
