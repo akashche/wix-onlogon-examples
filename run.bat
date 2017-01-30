@@ -29,9 +29,15 @@ rem msiexec /q /x test04.msi || exit /b 1
 rem popd || exit /b 1
 
 rem test05
+rem pushd "%SCRIPT_DIR%work" || exit /b 1
+rem msiexec /q /i test05.msi /l*v test05_log.txt || exit /b 1
+rem msiexec /q /x test05.msi || exit /b 1
+rem popd || exit /b 1
+
+rem test06
 pushd "%SCRIPT_DIR%work" || exit /b 1
-msiexec /q /i test05.msi /l*v test05_log.txt || exit /b 1
-msiexec /q /x test05.msi || exit /b 1
+msiexec /q /i test06.msi /l*v test06_log.txt || exit /b 1
+msiexec /q /x test06.msi || exit /b 1
 popd || exit /b 1
 
 echo EXIT_RUN_SUCCESS
