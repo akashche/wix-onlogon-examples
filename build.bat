@@ -21,4 +21,10 @@ pushd "%SCRIPT_DIR%work" || exit /b 1
 ..\wix\bin\light.exe -ext WixUIExtension -ext WixUtilExtension -sw1076 test02.wixobj || exit /b 1
 popd || exit /b 1
 
+rem test03
+pushd "%SCRIPT_DIR%work" || exit /b 1
+..\wix\bin\candle.exe ..\test03.wxs || exit /b 1
+..\wix\bin\light.exe -ext WixUIExtension -ext WixUtilExtension -sw1076 test03.wixobj || exit /b 1
+popd || exit /b 1
+
 echo EXIT_BUILD_SUCCESS

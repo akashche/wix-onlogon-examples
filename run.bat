@@ -16,4 +16,10 @@ msiexec /q /i test02.msi /l*v test02_log.txt || exit /b 1
 msiexec /q /x test02.msi || exit /b 1
 popd || exit /b 1
 
+rem test03
+pushd "%SCRIPT_DIR%work" || exit /b 1
+msiexec /q /i test03.msi /l*v test03_log.txt || exit /b 1
+msiexec /q /x test03.msi || exit /b 1
+popd || exit /b 1
+
 echo EXIT_RUN_SUCCESS
